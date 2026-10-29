@@ -13,6 +13,7 @@
 :root{
   --bg:#E6E8E5; --surface:#F6F7F5; --line:#D3D7D0; --ink:#20261F; --muted:#697165;
   --green:#2E7A46; --green-ink:#1E5A31; --green-soft:#D6E9DA; --danger:#A3392E;
+  --event:#D9C49A; --event-soft:#F3ECDD; --event-line:#DCCBA8; --event-ink:#6A5329;
   font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   color:var(--ink); background:var(--bg);
   box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
@@ -69,6 +70,17 @@ ul{list-style:none;margin:0;padding:0}
 .cell.today{box-shadow:inset 0 0 0 2px var(--ink)}
 .cell.sel{outline:2px solid var(--green);outline-offset:1px}
 .grid-key{display:flex;justify-content:space-between;margin-top:8px;font-size:.78rem;color:var(--muted)}
+.key-sw{display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--event);margin-right:5px;vertical-align:-1px}
+.event-banner{display:block;width:100%;text-align:left;margin-top:6px;border:1px solid var(--event-line);border-radius:12px;background:var(--event-soft);padding:10px 14px;color:var(--event-ink)}
+.event-banner b{display:block;font-size:1.02rem;color:var(--ink)}
+.event-banner span{font-size:.84rem}
+.ev-list{margin-top:6px}
+.ev-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;width:100%;border:0;border-top:1px solid var(--line);background:none;text-align:left;padding:10px 2px;font-size:.95rem}
+.ev-row:first-child{border-top:0}
+.ev-when{flex:none;color:var(--muted);font-size:.82rem;text-align:right}
+.chk{display:flex;align-items:center;gap:9px;margin-top:14px;font-size:.92rem}
+.chk input{flex:none;width:18px;height:18px;margin:0;accent-color:var(--green)}
+.btn.ghost.del{color:var(--danger)}
 
 /* ---------- Notes ---------- */
 .chips{display:flex;gap:8px;overflow-x:auto;padding:10px 0 6px;scrollbar-width:none}
@@ -366,6 +378,22 @@ textarea.doc-body{min-height:220px}
   </div>
 </dialog>
 
+<dialog id="event"><form method="dialog" autocomplete="off">
+  <h2 id="ev-head">All-day event</h2>
+  <input class="field" id="ev-name" placeholder="e.g. Deer hunting, Thanksgiving" aria-label="Event name">
+  <div class="form-grid">
+    <label class="lbl">Starts<input class="field" type="date" id="ev-start"></label>
+    <label class="lbl">Ends<input class="field" type="date" id="ev-end"></label>
+  </div>
+  <label class="chk"><input type="checkbox" id="ev-pause"> Pause daily tasks (your streak won't break)</label>
+  <label class="chk"><input type="checkbox" id="ev-yearly"> Repeats every year</label>
+  <div class="btns">
+    <button class="btn" value="ok">Save</button>
+    <button class="btn ghost del" value="delete" id="ev-del">Delete</button>
+    <button class="btn ghost cancel" value="cancel">Cancel</button>
+  </div>
+</form></dialog>
+
 <dialog id="order">
   <h2>Reorder projects</h2>
   <ul class="order-list" id="order-list"></ul>
@@ -493,7 +521,7 @@ function migrateGoals() {
 const fresh = () => ({
   projects: [{ id: 'inbox', name: 'Inbox', items: [] }], current: 'inbox', showDone: false,
   days: {}, repeats: [], menus: JSON.parse(JSON.stringify(DEFAULT_MENUS)), tab: 'today',
-  custom: [], workouts: [], docs: [], docCat: 'all',
+  custom: [], workouts: [], docs: [], docCat: 'all', events: [],
   goals: [feGoal()]
 });
 let S = load();
@@ -557,17 +585,48 @@ function getSlot(k, slotKey) {
   return r ? { task: r.task, done: false, repeat: r.id } : { task: '', done: false };
 }
 function setSlot(k, slotKey, entry) { (S.days[k] ??= {})[slotKey] = entry; }
+/* ---------- all-day events ---------- */
+const shiftYears = (k, n) => `${+k.slice(0, 4) + n}${k.slice(4)}`;
+// the occurrence of ev that covers day k, if any (yearly events shift by whole years)
+function occurrenceOn(ev, k) {
+  if (!ev.yearly) return ev.start <= k && k <= ev.end ? { start: ev.start, end: ev.end } : null;
+  const y = +k.slice(0, 4) - +ev.start.slice(0, 4);
+  for (const n of [y, y - 1]) {
+    if (n < 0) continue;
+    const start = shiftYears(ev.start, n), end = shiftYears(ev.end, n);
+    if (start <= k && k <= end) return { start, end };
+  }
+  return null;
+}
+function nextOccurrence(ev, from) {
+  if (!ev.yearly) return ev.end >= from ? { start: ev.start, end: ev.end } : null;
+  for (let n = Math.max(0, +from.slice(0, 4) - +ev.start.slice(0, 4) - 1); ; n++) {
+    const start = shiftYears(ev.start, n), end = shiftYears(ev.end, n);
+    if (end >= from) return { start, end };
+  }
+}
+const eventsOn = k => S.events.map(ev => ({ ev, occ: occurrenceOn(ev, k) })).filter(x => x.occ);
+const fmtDay = k => parse(k).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+const fmtRange = o => o.start === o.end ? parse(o.start).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' }) : `${fmtDay(o.start)} – ${fmtDay(o.end)}`;
+
 function dayStats(k) {
   const slots = slotsFor(k);
   const done = slots.filter(s => { const e = getSlot(k, s.key); return e.task && e.done; }).length;
-  return { done, total: slots.length };
+  // a paused event day with nothing planned is a day off: it neither counts nor breaks the streak
+  const off = eventsOn(k).some(x => x.ev.pause) && !slots.some(s => getSlot(k, s.key).task);
+  return { done, total: slots.length, off };
 }
 function streak() {
   let n = 0, k = todayKey();
-  const full = x => { const s = dayStats(x); return s.done === s.total; };
-  if (full(k)) n++;
-  k = addDays(k, -1);
-  while (full(k)) { n++; k = addDays(k, -1); }
+  const s0 = dayStats(k);
+  if (!s0.off && s0.done === s0.total) n++;
+  for (let i = 0; i < 3650; i++) {
+    k = addDays(k, -1);
+    const s = dayStats(k);
+    if (s.off) continue;
+    if (s.done !== s.total) break;
+    n++;
+  }
   return n;
 }
 function assign(k, slotKey, task, noteId, every, subId) {
@@ -612,7 +671,15 @@ function renderToday() {
   } else if (k < t0) {
     h += `<div class="catchup"><span>You're looking at ${dayLabel(k).toLowerCase() === 'yesterday' ? 'yesterday' : parse(k).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</span><button data-act="goto" data-day="${t0}">Back to today</button></div>`;
   }
-  h += `<div class="slots">`;
+  const evs = eventsOn(k), ds = dayStats(k);
+  for (const { ev, occ } of evs) {
+    const len = diffDays(occ.start, occ.end) + 1;
+    const info = [len > 1 ? `Day ${diffDays(occ.start, k) + 1} of ${len}` : 'All day', ev.pause ? 'Tasks paused' : ''].filter(Boolean).join(' · ');
+    h += `<button class="event-banner" data-act="ev-edit" data-ev="${ev.id}"><b>${esc(ev.title)}</b><span>${info}</span></button>`;
+  }
+  const hideSlots = ds.off && !S.days[k]?._show;
+  if (hideSlots) h += `<button class="add-slot" data-act="ev-show">Plan tasks anyway</button>`;
+  h += `<div class="slots"${hideSlots ? ' hidden' : ''}>`;
   for (const s of slotsFor(k)) {
     const e = getSlot(k, s.key);
     const rep = e.repeat ? S.repeats.find(r => r.id === e.repeat) : repeatFor(k, s.key);
@@ -630,9 +697,9 @@ function renderToday() {
       </button>
     </section>`;
   }
-  h += `</div><button class="add-slot" data-act="slot-add">+ Add a task</button>`;
-  const ds = dayStats(k);
-  h += `<p class="progress-line">${ds.done === ds.total ? 'All done. Nice work.' : `${ds.done} of ${ds.total} done`}</p>`;
+  h += `</div>`;
+  if (!hideSlots) h += `<button class="add-slot" data-act="slot-add">+ Add a task</button>`;
+  h += `<p class="progress-line">${ds.off ? 'Day off. Your streak is safe.' : ds.done === ds.total ? 'All done. Nice work.' : `${ds.done} of ${ds.total} done`}</p>`;
 
   for (const g of S.goals) {
     const t = g.trackers.find(x => trackStats(x).pct !== null), st = t && trackStats(t);
@@ -643,15 +710,27 @@ function renderToday() {
       ${t ? `<span class="gs-sub">${esc(t.name)} · ${esc(st.summary)}</span><span class="bar thin"><i style="width:${st.pct}%"></i></span>` : ''}</button>`;
   }
 
-  // 28-day grid ending today
+  // upcoming and ongoing events
   const t = todayKey();
+  const up = S.events.map(ev => ({ ev, occ: nextOccurrence(ev, t) })).filter(x => x.occ && diffDays(t, x.occ.start) <= 120)
+    .sort((a, b) => a.occ.start.localeCompare(b.occ.start)).slice(0, 6);
+  h += `<div class="grid-wrap"><div class="goal-top"><h2>Events</h2><button class="soft-btn" data-act="ev-new">+ Event</button></div>`;
+  h += up.length ? `<div class="ev-list">${up.map(({ ev, occ }) => {
+    const n = diffDays(t, occ.start);
+    const when = n <= 0 ? `Now, until ${fmtDay(occ.end)}` : `${fmtRange(occ)} · ${n === 1 ? 'tomorrow' : `in ${n} days`}`;
+    return `<button class="ev-row" data-act="ev-edit" data-ev="${ev.id}"><span>${esc(ev.title)}</span><span class="ev-when">${when}</span></button>`;
+  }).join('')}</div>` : `<p class="muted-p">Hunting trips, holidays, anything that takes the whole day.</p>`;
+  h += `</div>`;
+
+  // 28-day grid ending today
   h += `<div class="grid-wrap"><h2>Last 4 weeks</h2><div class="grid">`;
   for (let i = 27; i >= 0; i--) {
     const c = addDays(t, -i), s = dayStats(c), f = s.done / s.total;
-    const bg = f === 0 ? '#DDE1DB' : `color-mix(in srgb, var(--green) ${Math.round(25 + f * 75)}%, #DDE1DB)`;
-    h += `<button class="cell${c === t ? ' today' : ''}${c === k ? ' sel' : ''}" style="background:${bg}" data-act="goto" data-day="${c}" aria-label="${parse(c).toDateString()}: ${s.done} of ${s.total}">${s.done}</button>`;
+    const bg = s.off ? 'var(--event)' : f === 0 ? '#DDE1DB' : `color-mix(in srgb, var(--green) ${Math.round(25 + f * 75)}%, #DDE1DB)`;
+    const lbl = s.off ? eventsOn(c).map(x => x.ev.title).join(', ') : `${s.done} of ${s.total}`;
+    h += `<button class="cell${c === t ? ' today' : ''}${c === k ? ' sel' : ''}" style="background:${bg}" data-act="goto" data-day="${c}" aria-label="${parse(c).toDateString()}: ${esc(lbl)}">${s.done}</button>`;
   }
-  h += `</div><div class="grid-key"><span>4 weeks ago</span><span>Today</span></div></div>`;
+  h += `</div><div class="grid-key"><span>4 weeks ago</span><span><i class="key-sw"></i>Event day</span><span>Today</span></div></div>`;
   $('#today').innerHTML = h;
 }
 
@@ -1047,14 +1126,39 @@ $('#quick').addEventListener('submit', e => {
   q.focus();
 });
 
+/* ---------- event dialog ---------- */
+function openEvent(ev, day) {
+  const d = $('#event');
+  $('#ev-head').textContent = ev ? 'Edit event' : 'New all-day event';
+  $('#ev-name').value = ev?.title || '';
+  $('#ev-start').value = ev?.start || day;
+  $('#ev-end').value = ev?.end || day;
+  $('#ev-pause').checked = ev ? ev.pause : true;
+  $('#ev-yearly').checked = !!ev?.yearly;
+  $('#ev-del').hidden = !ev;
+  d.returnValue = ''; d.showModal();
+  if (!ev) setTimeout(() => $('#ev-name').focus(), 60);
+  d.addEventListener('close', () => {
+    if (d.returnValue === 'delete' && ev) { S.events = S.events.filter(x => x !== ev); save(); renderAll(); toast('Event deleted'); return; }
+    if (d.returnValue !== 'ok') return;
+    const title = $('#ev-name').value.trim(), start = $('#ev-start').value;
+    if (!title || !start) return toast('Add a name and a start date');
+    const end = $('#ev-end').value > start ? $('#ev-end').value : start;
+    const data = { title, start, end, pause: $('#ev-pause').checked, yearly: $('#ev-yearly').checked };
+    if (ev) Object.assign(ev, data); else S.events.push({ id: uid(), ...data });
+    save(); renderAll(); toast(ev ? 'Event saved' : 'Event added');
+  }, { once: true });
+}
+$('#ev-start').addEventListener('change', e => { if ($('#ev-end').value < e.target.value) $('#ev-end').value = e.target.value; });
+
 /* ---------- plan a note or step into a day ---------- */
 async function planIntoDay(it, sb) {
   const t = todayKey();
   const days = [];
   for (let i = 0; i < 7; i++) {
-    const k = addDays(t, i), st = slotsFor(k).filter(s => !getSlot(k, s.key).task).length;
+    const k = addDays(t, i), st = slotsFor(k).filter(s => !getSlot(k, s.key).task).length, evs = eventsOn(k).map(x => x.ev.title);
     days.push({ value: k, label: i < 2 ? dayLabel(k) : parse(k).toLocaleDateString(undefined, { weekday: 'long', month: 'short', day: 'numeric' }),
-                sub: st ? `${st} open slot${st > 1 ? 's' : ''}` : 'All slots filled' });
+                sub: [...evs, st ? `${st} open slot${st > 1 ? 's' : ''}` : 'All slots filled'].join(' · ') });
   }
   const k = await menu(`Plan “${sb ? sb.text : it.text}”`, days);
   if (!k) return;
@@ -1122,6 +1226,9 @@ document.addEventListener('click', async e => {
     }
     case 'pick-task': S.custom.includes(b.dataset.task) ? pickCustom(b.dataset.task) : applyPick(b.dataset.task); break;
     case 'pick-custom': pickCustom($('#pick-custom').value.trim()); break;
+    case 'ev-new': openEvent(null, viewDay); break;
+    case 'ev-edit': { const ev = S.events.find(x => x.id === b.dataset.ev); if (ev) openEvent(ev); break; }
+    case 'ev-show': (S.days[viewDay] ??= {})._show = true; save(); renderToday(); break;
     case 'slot-add': { const key = addExtra(viewDay); save(); renderToday(); openPicker(viewDay, key); break; }
     case 'slot-remove': removeSlot(pickCtx.k, pickCtx.slotKey); $('#pick').close(); save(); renderAll(); break;
     case 'pick-surprise': {
@@ -1144,12 +1251,14 @@ document.addEventListener('click', async e => {
     case 'today-menu': {
       const d = S.days[viewDay], changed = d?._extra?.length || d?._hide?.length;
       const v = await menu('Daily three', [
+        { value: 'event', label: 'Add an all-day event', sub: 'Hunting trip, holiday, travel day' },
         { value: 'lists', label: 'Edit task lists' },
         ...(changed ? [{ value: 'reset-slots', label: 'Reset slots for this day', sub: 'Back to the default slots' }] : []),
         { value: 'export', label: 'Export backup', sub: 'Everything in Jot' },
         { value: 'import', label: 'Import backup' }
       ]);
-      if (v === 'lists') openLists();
+      if (v === 'event') openEvent(null, viewDay);
+      else if (v === 'lists') openLists();
       else if (v === 'reset-slots') { (d._extra || []).forEach(x => delete d[x]); delete d._extra; delete d._hide; save(); renderToday(); }
       else if (v === 'export') exportBackup();
       else if (v === 'import') $('#file').click();
