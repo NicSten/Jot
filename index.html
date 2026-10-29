@@ -50,12 +50,12 @@ ul{list-style:none;margin:0;padding:0}
 .slot-note{font-size:.8rem;color:var(--muted)}
 .slot.is-done .slot-task{color:var(--muted)}
 
-.breaker{flex:none;width:76px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 0;border:1px solid var(--line);border-radius:10px;background:#EDEFEC}
+.breaker{flex:none;align-self:center;width:54px;display:flex;flex-direction:column;align-items:center;gap:3px;padding:5px 0;border:1px solid var(--line);border-radius:9px;background:#EDEFEC}
 .breaker:disabled{opacity:.45}
-.bk-slot{position:relative;width:28px;height:42px;border-radius:6px;background:#C7CCC4;box-shadow:inset 0 1px 3px rgba(20,30,20,.25)}
-.bk-handle{position:absolute;left:3px;right:3px;bottom:3px;height:18px;border-radius:4px;background:#8C9489;box-shadow:0 1px 1px rgba(0,0,0,.2);transition:bottom .15s,background .15s}
-.breaker[aria-checked="true"] .bk-handle{bottom:21px;background:var(--green)}
-.bk-lbl{font-size:.68rem;color:var(--muted);line-height:1}
+.bk-slot{position:relative;width:20px;height:30px;border-radius:5px;background:#C7CCC4;box-shadow:inset 0 1px 3px rgba(20,30,20,.25)}
+.bk-handle{position:absolute;left:2px;right:2px;bottom:2px;height:13px;border-radius:3px;background:#8C9489;box-shadow:0 1px 1px rgba(0,0,0,.2);transition:bottom .15s,background .15s}
+.breaker[aria-checked="true"] .bk-handle{bottom:15px;background:var(--green)}
+.bk-lbl{font-size:.58rem;color:var(--muted);line-height:1}
 .breaker[aria-checked="true"] .bk-on{color:var(--green-ink);font-weight:700}
 .breaker[aria-checked="false"] .bk-off{color:var(--ink);font-weight:700}
 
@@ -130,8 +130,8 @@ textarea.field{margin-top:8px;resize:vertical;min-height:84px;line-height:1.45}
 .quick input{flex:1;min-width:0;height:48px;border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:0 15px;font-size:1rem}
 .quick input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px var(--green-soft)}
 .quick button{height:48px;border:0;border-radius:14px;background:var(--green);color:#fff;font-weight:650;padding:0 20px}
-.tabs{display:flex;max-width:680px;margin:0 auto;padding:4px 12px 6px;gap:8px}
-.tab{flex:1;border:0;background:none;border-radius:12px;padding:10px 0;font-weight:600;color:var(--muted)}
+.tabs{display:flex;max-width:680px;margin:0 auto;padding:4px 8px 6px;gap:4px}
+.tab{flex:1;min-width:0;border:0;background:none;border-radius:12px;padding:10px 0;font-weight:600;font-size:.84rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tab[aria-selected="true"]{background:var(--surface);color:var(--green-ink);box-shadow:inset 0 0 0 1px var(--line)}
 
 /* ---------- dialogs ---------- */
@@ -173,6 +173,80 @@ dialog .field{margin-top:12px}
 .seg button{flex:1;border:0;border-radius:8px;background:none;padding:7px 4px;font-size:.85rem;color:var(--muted)}
 .seg button[aria-pressed="true"]{background:#fff;color:var(--ink);font-weight:600}
 
+/* ---------- extra slots, goals, workouts, standards ---------- */
+.add-slot{display:block;width:100%;margin-top:10px;border:1.5px dashed #A9B3A5;border-radius:14px;background:transparent;color:var(--green-ink);font-weight:600;padding:11px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:10px}
+.card h2{margin:0;font-size:1rem}
+.bar{display:block;height:10px;border-radius:5px;background:var(--line);overflow:hidden;margin-top:10px}
+.bar i{display:block;height:100%;background:var(--green);border-radius:5px}
+.bar.thin{height:5px;margin-top:6px}
+.goal-strip{display:block;width:100%;text-align:left;margin-top:12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:10px 12px;font-size:.88rem}
+.gs-top{display:flex;justify-content:space-between;gap:10px;color:var(--muted)}
+.gs-top b{color:var(--ink)}
+.goal-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.countdown{margin:8px 0 0;color:var(--muted);font-size:.95rem}
+.countdown b{font-size:2.3rem;color:var(--ink);font-weight:700;letter-spacing:-.02em;margin-right:7px;font-variant-numeric:tabular-nums}
+.goal-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-top:6px;font-size:.86rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.goal-meta b{color:var(--ink)}
+.goal-pace{margin:4px 0 0;font-size:.82rem;color:var(--green-ink)}
+.goal-detail{margin-top:14px;padding-top:4px;border-top:1px solid var(--line)}
+.gs-sub{display:block;margin-top:4px;font-size:.8rem;color:var(--muted)}
+.trk{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.trk-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.trk-name{font-weight:650}
+.trk-val{color:var(--muted);font-size:.88rem;font-variant-numeric:tabular-nums;text-align:right}
+.trk .btn-row{margin-top:10px}
+.trk-edit{margin-top:14px;padding:10px 12px 12px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.trk-edit .trk-top{align-items:center}
+.trk-kind{font-size:.78rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--green-ink)}
+.trk-edit .lbl{margin-top:2px}
+.trk-preset{margin-top:10px}
+.pill.on{background:var(--green);border-color:var(--green);color:#fff}
+.dots{display:flex;gap:6px;margin-top:10px}
+.dot{flex:1;max-width:44px;aspect-ratio:1;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--muted);font-weight:600;font-size:.85rem;padding:0}
+.dot.today{border-color:var(--ink)}
+.dot.on{background:var(--green);border-color:var(--green);color:#fff}
+.dot:disabled{opacity:.35}
+.btn-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.pill{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 12px;font-size:.88rem}
+.pill.green{background:var(--green-soft);border-color:transparent;color:var(--green-ink);font-weight:600}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.form-grid .full{grid-column:1/-1}
+.form-grid .btn-row{margin-top:0}
+.lbl{display:block;font-size:.8rem;color:var(--muted);margin-top:10px}
+.lbl .field{margin-top:4px;color:var(--ink)}
+.mini-h{margin:16px 0 4px;font-size:.84rem;color:var(--muted);font-weight:600}
+.muted-p{margin:4px 0;color:var(--muted);font-size:.9rem}
+.log-list li{display:flex;align-items:center;gap:8px;border-top:1px solid var(--line);padding:2px 0}
+.log-list li:first-child{border-top:0}
+.log-list input{flex:1;min-width:0;border:0;background:none;padding:8px 0;font-size:.92rem}
+.log-h{font-weight:600;font-variant-numeric:tabular-nums}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.stat-row b{display:block;font-size:1.35rem;font-variant-numeric:tabular-nums}
+.stat-row span{font-size:.8rem;color:var(--muted)}
+.type-row{display:grid;grid-template-columns:7.5em 1fr auto;align-items:center;gap:10px;margin-top:6px;font-size:.88rem}
+.type-row .bar{margin:0;height:6px}
+.type-row span:last-child{color:var(--muted);font-variant-numeric:tabular-nums}
+.day-h{margin:18px 4px 6px;font-size:.85rem;color:var(--muted);font-weight:600}
+.wk-row{display:flex;align-items:center;gap:8px;padding:8px 4px 8px 14px;border-top:1px solid var(--line)}
+.wk-row:first-child{border-top:0}
+.wk-main{flex:1;min-width:0}
+.wk-type{display:block;font-weight:600}
+.wk-sub{display:block;font-size:.82rem;color:var(--muted);overflow-wrap:anywhere}
+.wk-mins{color:var(--green-ink);font-weight:650;font-variant-numeric:tabular-nums;white-space:nowrap}
+.doc-open{padding-left:14px}
+.doc-open .meta{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.doc-detail{padding-left:14px}
+.doc-opts{display:flex;gap:8px;align-items:center;margin-top:8px}
+.doc-opts select{flex:none;width:auto;padding:7px 8px}
+.doc-opts .seg{flex:1;margin-top:0}
+textarea.doc-body{min-height:220px}
+.order-list{margin-top:10px}
+.order-list li{display:flex;align-items:center;gap:4px;border-top:1px solid var(--line);padding:3px 0}
+.order-list li:first-child{border-top:0}
+.order-list span{flex:1;min-width:0;overflow-wrap:anywhere}
+.x:disabled{opacity:.25}
+
 .toast{position:fixed;left:50%;bottom:calc(140px + env(safe-area-inset-bottom,0px));transform:translate(-50%,10px);opacity:0;
   background:var(--ink);color:#fff;border-radius:10px;padding:10px 16px;font-size:.92rem;pointer-events:none;transition:opacity .2s,transform .2s;z-index:20;max-width:90vw}
 .toast.show{opacity:1;transform:translate(-50%,0)}
@@ -207,6 +281,27 @@ dialog .field{margin-top:12px}
   <main><div class="wrap" id="main"></div></main>
 </section>
 
+<!-- Workouts -->
+<section id="v-work" hidden>
+  <header><div class="wrap"><div class="top"><h1>Workouts</h1></div></div></header>
+  <main><div class="wrap" id="work"></div></main>
+</section>
+
+<!-- Goals -->
+<section id="v-goals" hidden>
+  <header><div class="wrap"><div class="top"><h1>Goals</h1></div></div></header>
+  <main><div class="wrap" id="goals"></div></main>
+</section>
+
+<!-- Standards -->
+<section id="v-docs" hidden>
+  <header><div class="wrap">
+    <div class="top"><h1>Standards</h1></div>
+    <nav class="chips" id="doc-chips" aria-label="Categories"></nav>
+  </div></header>
+  <main><div class="wrap" id="docs"></div></main>
+</section>
+
 <div class="bottom">
   <div class="quick" id="quick-wrap" hidden>
     <form id="quick" autocomplete="off">
@@ -215,8 +310,11 @@ dialog .field{margin-top:12px}
     </form>
   </div>
   <nav class="tabs" role="tablist">
-    <button class="tab" role="tab" data-tab="today">Daily three</button>
+    <button class="tab" role="tab" data-tab="today">Daily</button>
     <button class="tab" role="tab" data-tab="notes">Notes</button>
+    <button class="tab" role="tab" data-tab="work">Workouts</button>
+    <button class="tab" role="tab" data-tab="goals">Goals</button>
+    <button class="tab" role="tab" data-tab="docs">Standards</button>
   </nav>
 </div>
 
@@ -268,6 +366,12 @@ dialog .field{margin-top:12px}
   </div>
 </dialog>
 
+<dialog id="order">
+  <h2>Reorder projects</h2>
+  <ul class="order-list" id="order-list"></ul>
+  <div class="btns"><button class="btn" data-act="order-done">Done</button></div>
+</dialog>
+
 <input type="file" id="file" accept="application/json,.json" hidden>
 <div class="toast" id="toast" role="status"></div>
 
@@ -298,8 +402,36 @@ const WEEKEND = [
   { key: 'pmBig', when: 'Evening, big two', menu: 'eveBig' },
   { key: 'pmSmall', when: 'Evening, small one', menu: 'eveSmall' }
 ];
-const slotsFor = k => isWeekend(k) ? WEEKEND : WEEKDAY;
+// a day can hide default slots (_hide) and add extra ones (_extra)
+function slotsFor(k) {
+  const d = S.days[k] || {}, hide = d._hide || [];
+  const base = (isWeekend(k) ? WEEKEND : WEEKDAY).filter(s => !hide.includes(s.key));
+  return base.concat((d._extra || []).map(key => ({ key, when: 'Extra task', menu: 'all', extra: true })));
+}
+function addExtra(k) {
+  const key = 'x' + uid();
+  ((S.days[k] ??= {})._extra ??= []).push(key);
+  return key;
+}
+function removeSlot(k, slotKey) {
+  const d = S.days[k] ??= {};
+  if (d._extra?.includes(slotKey)) d._extra = d._extra.filter(x => x !== slotKey);
+  else (d._hide ??= []).push(slotKey);
+  delete d[slotKey];
+}
 const MENU_NAMES = { morning: 'Morning', eveSmall: 'Evening small', eveBig: 'Big tasks' };
+const LIST_TABS = { ...MENU_NAMES, custom: 'Your tasks' };
+// extra slots pick from every list, merged by category name
+function menuCats(m) {
+  if (m !== 'all') return S.menus[m] || [];
+  const out = [];
+  for (const c of Object.values(S.menus).flat()) {
+    const hit = out.find(o => o.name === c.name);
+    if (hit) hit.tasks.push(...c.tasks.filter(t => !hit.tasks.includes(t)));
+    else out.push({ name: c.name, tasks: [...c.tasks] });
+  }
+  return out;
+}
 
 const DEFAULT_MENUS = {
   morning: [
@@ -327,13 +459,45 @@ const DEFAULT_MENUS = {
   ]
 };
 
+/* ---------- goal trackers ---------- */
+const FE_TOPICS = ['Mathematics', 'Probability and statistics', 'Ethics and professional practice', 'Engineering economics',
+  'Properties of electrical materials', 'Circuit analysis (DC and AC)', 'Linear systems', 'Signal processing', 'Electronics',
+  'Power systems', 'Electromagnetics', 'Control systems', 'Communications', 'Computer networks', 'Digital systems',
+  'Computer systems', 'Software engineering'];
+const TRACK_KINDS = {
+  checklist: { label: 'Checklist', sub: 'Topics or milestones to finish', name: 'Topics' },
+  count: { label: 'Count', sub: 'Practice problems, chapters, flashcards', name: 'Practice problems', unit: 'problems', target: 500 },
+  score: { label: 'Score', sub: 'Practice exam results against a passing mark', name: 'Practice exam score', unit: '%', target: 70 },
+  days: { label: 'Consistency', sub: 'Days a week you put in work', name: 'Study days', target: 5 },
+  hours: { label: 'Time', sub: 'Hours logged toward a target', name: 'Study time' }
+};
+const TARGET_LABEL = { hours: 'Target hours', count: 'Target', score: 'Passing score', days: 'Days per week' };
+const newTracker = (kind, extra = {}) => ({ id: uid(), kind, name: TRACK_KINDS[kind].name, unit: TRACK_KINDS[kind].unit || '',
+  target: TRACK_KINDS[kind].target || 0, log: [], items: [], ...extra });
+const feItems = () => FE_TOPICS.map(text => ({ id: uid(), text, done: false }));
+const feGoal = () => ({ id: 'fe', name: 'FE exam', date: '', trackers: [
+  newTracker('checklist', { name: 'Exam topics', items: feItems() }),
+  newTracker('count'), newTracker('score'), newTracker('days')
+] });
+// goals used to have a single hours target; turn that into an hours tracker
+function migrateGoals() {
+  S.goals = (S.goals || []).map(g => {
+    if (g.trackers) return g;
+    if (g.id === 'fe' && !(g.log || []).length) return { ...feGoal(), date: g.date || '' };
+    return { id: g.id, name: g.name, date: g.date || '', trackers: [newTracker('hours', {
+      target: g.target || 0, log: (g.log || []).map(l => ({ id: l.id, date: l.date, v: l.hours, created: l.created })) })] };
+  });
+}
+
 /* ---------- state ---------- */
 const fresh = () => ({
   projects: [{ id: 'inbox', name: 'Inbox', items: [] }], current: 'inbox', showDone: false,
-  days: {}, repeats: [], menus: JSON.parse(JSON.stringify(DEFAULT_MENUS)), tab: 'today'
+  days: {}, repeats: [], menus: JSON.parse(JSON.stringify(DEFAULT_MENUS)), tab: 'today',
+  custom: [], workouts: [], docs: [], docCat: 'all',
+  goals: [feGoal()]
 });
 let S = load();
-let open = null, viewDay = todayKey(), pickCtx = null, listsMenu = 'morning', listsDraft = null, saveTimer = null;
+let open = null, openGoal = null, openDoc = null, viewDay = todayKey(), pickCtx = null, listsMenu = 'morning', listsDraft = null, saveTimer = null;
 
 function load() {
   try {
@@ -466,9 +630,18 @@ function renderToday() {
       </button>
     </section>`;
   }
-  h += `</div>`;
+  h += `</div><button class="add-slot" data-act="slot-add">+ Add a task</button>`;
   const ds = dayStats(k);
   h += `<p class="progress-line">${ds.done === ds.total ? 'All done. Nice work.' : `${ds.done} of ${ds.total} done`}</p>`;
+
+  for (const g of S.goals) {
+    const t = g.trackers.find(x => trackStats(x).pct !== null), st = t && trackStats(t);
+    if (!g.date && !t) continue;
+    const days = g.date ? diffDays(todayKey(), g.date) : null;
+    const left = days > 0 ? `${days} day${days === 1 ? '' : 's'} left` : days === 0 ? 'Today' : '';
+    h += `<button class="goal-strip" data-tab="goals"><span class="gs-top"><b>${esc(g.name)}</b><span>${left}</span></span>
+      ${t ? `<span class="gs-sub">${esc(t.name)} · ${esc(st.summary)}</span><span class="bar thin"><i style="width:${st.pct}%"></i></span>` : ''}</button>`;
+  }
 
   // 28-day grid ending today
   const t = todayKey();
@@ -485,14 +658,19 @@ function renderToday() {
 /* ---------- picker ---------- */
 function openPicker(k, slotKey) {
   const slot = slotsFor(k).find(s => s.key === slotKey);
-  pickCtx = { k, slotKey, menu: slot.menu };
+  pickCtx = { k, slotKey, menu: slot.menu, extra: !!slot.extra };
   const cur = getSlot(k, slotKey);
   $('#pick-title').textContent = `${slot.when}, ${dayLabel(k).toLowerCase() === 'today' ? 'today' : dayLabel(k)}`;
   $('#pick-custom').value = '';
   const rep = cur.repeat && S.repeats.find(r => r.id === cur.repeat);
   $('#pick-rep').value = rep ? String(rep.every) : '0';
+  $('#pick-rep').hidden = !!slot.extra;
 
   let h = '';
+  if (S.custom.length) {
+    h += `<h3>Your tasks</h3><div class="opts">` + S.custom.map(t =>
+      `<button class="opt${cur.task === t && !cur.noteId ? ' cur' : ''}" data-act="pick-task" data-task="${esc(t)}">${esc(t)}</button>`).join('') + `</div>`;
+  }
   for (const p of S.projects) {
     const open = p.items.filter(i => !i.done);
     if (!open.length) continue;
@@ -504,8 +682,8 @@ function openPicker(k, slotKey) {
     }
     h += `</div>`;
   }
-  if (S.projects.some(p => p.items.some(i => !i.done))) h += `<h3 class="lists-h">Your task lists</h3>`;
-  for (const cat of S.menus[slot.menu] || []) {
+  if (h) h += `<h3 class="lists-h">Standard task lists</h3>`;
+  for (const cat of menuCats(slot.menu)) {
     if (!cat.tasks.length) continue;
     h += `<h3>${esc(cat.name)}</h3><div class="opts">` + cat.tasks.map(t =>
       `<button class="opt${cur.task === t && !cur.noteId ? ' cur' : ''}" data-act="pick-task" data-task="${esc(t)}">${esc(t)}</button>`).join('') + `</div>`;
@@ -513,6 +691,7 @@ function openPicker(k, slotKey) {
   h += `<div class="pick-foot">`;
   if (cur.task) h += `<button class="btn ghost" data-act="pick-clear">Clear this day</button>`;
   if (rep) h += `<button class="btn ghost" data-act="pick-stop">Stop repeating</button>`;
+  if (slotsFor(k).length > 1) h += `<button class="btn ghost" data-act="slot-remove">Remove this slot</button>`;
   h += `<button class="btn ghost" data-act="pick-close">Close</button></div>`;
   $('#pick-body').innerHTML = h;
   $('#pick').showModal();
@@ -520,8 +699,14 @@ function openPicker(k, slotKey) {
 }
 function applyPick(task, noteId, subId) {
   if (!pickCtx || !task) return;
-  assign(pickCtx.k, pickCtx.slotKey, task, noteId, noteId ? 0 : +$('#pick-rep').value, subId);
+  assign(pickCtx.k, pickCtx.slotKey, task, noteId, noteId || pickCtx.extra ? 0 : +$('#pick-rep').value, subId);
   $('#pick').close(); save(); renderAll();
+}
+// typed tasks are remembered and shown first next time
+function pickCustom(task) {
+  if (!task) return;
+  S.custom = [task, ...S.custom.filter(t => t !== task)].slice(0, 15);
+  applyPick(task);
 }
 
 /* ---------- render: notes ---------- */
@@ -589,12 +774,258 @@ function renderNotes() {
   $('.chip[aria-pressed="true"]')?.scrollIntoView({ inline: 'nearest', block: 'nearest' });
 }
 
+function renderOrder() {
+  const n = S.projects.length;
+  $('#order-list').innerHTML = S.projects.map((p, i) => `<li><span>${esc(p.name)}</span>
+    <button class="x" data-act="order-move" data-i="${i}" data-d="-1" aria-label="Move ${esc(p.name)} up"${i ? '' : ' disabled'}>↑</button>
+    <button class="x" data-act="order-move" data-i="${i}" data-d="1" aria-label="Move ${esc(p.name)} down"${i < n - 1 ? '' : ' disabled'}>↓</button></li>`).join('');
+}
+
+/* ---------- render: workouts ---------- */
+const WORK_TYPES = ['Run', 'Bike', 'Lift', 'Kettlebell', 'Walk', 'Hike', 'Climb', 'Swim', 'Stretch', 'Yoga'];
+const fmtMins = m => m < 60 ? `${m} min` : `${Math.floor(m / 60)} h${m % 60 ? ` ${m % 60} min` : ''}`;
+const dateShort = k => Math.abs(diffDays(todayKey(), k)) <= 1 ? dayLabel(k) : parse(k).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
+// recent types first, then saved workout standards, then the defaults
+function workTypes() {
+  const seen = [];
+  for (const w of [...S.workouts].sort((a, b) => b.created - a.created)) if (!seen.includes(w.type)) seen.push(w.type);
+  for (const d of S.docs) if (d.cat === 'Workouts' && !seen.includes(d.title)) seen.push(d.title);
+  for (const t of WORK_TYPES) if (!seen.includes(t)) seen.push(t);
+  return seen;
+}
+function renderWork() {
+  const t = todayKey(), types = workTypes();
+  let h = `<form class="card" id="wk-form" autocomplete="off">
+    <h2>Log a workout</h2>
+    <div class="btn-row">${types.slice(0, 8).map(x => `<button type="button" class="pill" data-act="wk-type" data-type="${esc(x)}">${esc(x)}</button>`).join('')}</div>
+    <div class="form-grid">
+      <input class="field full" id="wk-type" list="wk-types" placeholder="Type, e.g. Run" aria-label="Workout type">
+      <input class="field" id="wk-mins" type="number" inputmode="numeric" min="1" placeholder="Minutes" aria-label="Duration in minutes">
+      <input class="field" id="wk-date" type="date" value="${t}" aria-label="Date">
+      <div class="btn-row full">${[15, 20, 30, 45, 60, 90].map(m => `<button type="button" class="pill" data-act="wk-mins" data-mins="${m}">${m < 60 ? m + ' min' : m / 60 + ' h'}</button>`).join('')}</div>
+      <input class="field full" id="wk-note" placeholder="Notes (optional)" aria-label="Notes">
+      <button class="btn full">Log workout</button>
+    </div>
+    <datalist id="wk-types">${types.map(x => `<option value="${esc(x)}">`).join('')}</datalist>
+  </form>`;
+
+  const monday = addDays(t, -((parse(t).getDay() + 6) % 7));
+  const week = S.workouts.filter(w => w.date >= monday && w.date <= t);
+  const month = S.workouts.filter(w => w.date > addDays(t, -28) && w.date <= t);
+  const byType = {};
+  month.forEach(w => { const b = byType[w.type] ??= { n: 0, mins: 0 }; b.n++; b.mins += w.mins; });
+  const rows = Object.entries(byType).sort((a, b) => b[1].mins - a[1].mins);
+  const max = Math.max(1, ...rows.map(r => r[1].mins));
+  h += `<div class="card"><h2>This week</h2>
+    <div class="stat-row">
+      <div><b>${week.length}</b><span>workouts</span></div>
+      <div><b>${fmtMins(week.reduce((a, w) => a + w.mins, 0))}</b><span>total time</span></div>
+      <div><b>${month.length}</b><span>last 28 days</span></div>
+    </div>
+    ${rows.length ? `<h3 class="mini-h">Last 28 days by type</h3>` + rows.map(([type, b]) =>
+      `<div class="type-row"><span>${esc(type)}</span><span class="bar"><i style="width:${Math.round(b.mins / max * 100)}%"></i></span><span>${b.n}× · ${fmtMins(b.mins)}</span></div>`).join('') : ''}
+  </div>`;
+
+  const list = [...S.workouts].sort((a, b) => b.date.localeCompare(a.date) || b.created - a.created).slice(0, 100);
+  if (!list.length) h += `<p class="empty small">No workouts logged yet.</p>`;
+  let day = null;
+  for (const w of list) {
+    if (w.date !== day) { if (day) h += `</ul>`; day = w.date; h += `<h3 class="day-h">${dateShort(day)}</h3><ul class="list">`; }
+    h += `<li class="wk-row" data-wk="${w.id}"><div class="wk-main"><span class="wk-type">${esc(w.type)}</span>${w.note ? `<span class="wk-sub">${esc(w.note)}</span>` : ''}</div>
+      <span class="wk-mins">${fmtMins(w.mins)}</span><button class="x" data-act="wk-del" aria-label="Delete workout">×</button></li>`;
+  }
+  if (day) h += `</ul>`;
+  $('#work').innerHTML = h;
+}
+
+/* ---------- render: goals ---------- */
+const hr = x => String(Math.round(x * 10) / 10);
+const weekStart = k => addDays(k, -((parse(k).getDay() + 6) % 7));
+function fmtV(t, v) {
+  if (t.kind === 'hours') return `${hr(v)} h`;
+  if (t.kind === 'score') return t.unit === '%' ? `${hr(v)}%` : `${hr(v)} ${t.unit}`.trim();
+  return `${hr(v)} ${t.unit}`.trim();
+}
+// summary text, progress percent (null = no bar) and a secondary note per tracker
+function trackStats(t) {
+  const today = todayKey(), sum = l => l.reduce((a, x) => a + x.v, 0);
+  if (t.kind === 'checklist') {
+    const done = t.items.filter(i => i.done).length, total = t.items.length;
+    return { done, total, rem: total - done, summary: `${done}/${total} done`, pct: total ? done / total * 100 : null };
+  }
+  if (t.kind === 'days') {
+    const set = new Set(t.log.map(l => l.date)), wk = t.log.filter(l => l.date >= weekStart(today) && l.date <= today).length;
+    let k = set.has(today) ? today : addDays(today, -1), streak = 0;
+    while (set.has(k)) { streak++; k = addDays(k, -1); }
+    return { summary: t.target ? `${wk}/${t.target} this week` : `${wk} this week`, pct: t.target ? Math.min(100, wk / t.target * 100) : null,
+             note: streak ? `${streak}-day streak` : '' };
+  }
+  if (t.kind === 'score') {
+    const log = [...t.log].sort((a, b) => a.date.localeCompare(b.date) || a.created - b.created);
+    const latest = log.at(-1)?.v;
+    if (latest === undefined) return { summary: t.target ? `Pass at ${fmtV(t, t.target)}` : 'No scores yet', pct: t.target ? 0 : null };
+    return { summary: `Latest ${fmtV(t, latest)}${t.target ? ` / ${fmtV(t, t.target)}` : ''}`, pct: t.target ? Math.min(100, latest / t.target * 100) : null,
+             note: log.length > 1 ? log.slice(-5).map(l => hr(l.v)).join(' → ') + ` · best ${fmtV(t, Math.max(...log.map(l => l.v)))}` : '' };
+  }
+  const total = sum(t.log), week = sum(t.log.filter(l => l.date > addDays(today, -7) && l.date <= today));
+  return { total, rem: Math.max(0, t.target - total), pct: t.target ? Math.min(100, total / t.target * 100) : null,
+           summary: t.target ? `${hr(total)} / ${fmtV(t, t.target)}` : fmtV(t, total), note: `${fmtV(t, week)} in the last 7 days` };
+}
+function trackPace(g, t, st) {
+  const days = g.date ? diffDays(todayKey(), g.date) : 0;
+  if (days <= 0 || !st.rem || !['hours', 'count', 'checklist'].includes(t.kind) || (t.kind !== 'checklist' && !t.target)) return '';
+  const per = st.rem / (days / 7);
+  return t.kind === 'checklist' ? `${hr(per)} a week to finish` : `${fmtV(t, per)} a week to hit target`;
+}
+function trackerHTML(g, t) {
+  const st = trackStats(t), pace = trackPace(g, t, st), today = todayKey();
+  let h = `<div class="trk" data-trk="${t.id}">
+    <div class="trk-top"><span class="trk-name">${esc(t.name)}</span><span class="trk-val">${esc(st.summary)}</span></div>
+    ${st.pct !== null ? `<span class="bar thin"><i style="width:${st.pct}%"></i></span>` : ''}
+    ${st.note || pace ? `<div class="goal-meta"><span>${esc(st.note || '')}</span><span class="goal-pace">${esc(pace)}</span></div>` : ''}`;
+  if (t.kind === 'hours' || t.kind === 'count') {
+    const steps = t.kind === 'hours' ? [[0.5, '+30 min'], [1, '+1 h'], [2, '+2 h']] : [[1, '+1'], [5, '+5'], [10, '+10']];
+    h += `<div class="btn-row">${steps.map(([v, l]) => `<button class="pill green" data-act="trk-add" data-v="${v}">${l}</button>`).join('')}<button class="pill" data-act="trk-other">Other…</button></div>`;
+  } else if (t.kind === 'score') {
+    h += `<div class="btn-row"><button class="pill green" data-act="trk-other">Add a score</button></div>`;
+  } else if (t.kind === 'days') {
+    const ws = weekStart(today), set = new Set(t.log.map(l => l.date));
+    h += `<div class="dots">${[0, 1, 2, 3, 4, 5, 6].map(i => {
+      const k = addDays(ws, i), on = set.has(k);
+      return `<button class="dot${on ? ' on' : ''}${k === today ? ' today' : ''}" data-act="trk-day" data-day="${k}" aria-pressed="${on}" aria-label="${parse(k).toLocaleDateString(undefined, { weekday: 'long' })}"${k > today ? ' disabled' : ''}>${'MTWTFSS'[i]}</button>`;
+    }).join('')}</div>`;
+  } else {
+    h += t.items.length
+      ? `<div class="btn-row">${t.items.map(i => `<button class="pill${i.done ? ' on' : ''}" data-act="trk-item" data-item="${i.id}" aria-pressed="${i.done}">${esc(i.text)}</button>`).join('')}</div>`
+      : `<p class="muted-p">No items yet. Add them under Edit.</p>`;
+  }
+  return h + `</div>`;
+}
+function renderGoals() {
+  let h = '';
+  for (const g of S.goals) {
+    const isOpen = openGoal === g.id, days = g.date ? diffDays(todayKey(), g.date) : null;
+    const when = g.date ? parse(g.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+    let cd;
+    if (days === null) cd = `<p class="countdown">No date set yet. Tap Edit to add one.</p>`;
+    else if (days > 0) cd = `<p class="countdown"><b>${days}</b>day${days === 1 ? '' : 's'} until ${when}</p>`;
+    else if (days === 0) cd = `<p class="countdown"><b>Today</b>Good luck.</p>`;
+    else cd = `<p class="countdown">Was ${when}, ${-days} day${days === -1 ? '' : 's'} ago</p>`;
+    h += `<section class="card" data-goal="${g.id}">
+      <div class="goal-top"><h2>${esc(g.name)}</h2><button class="soft-btn" data-act="goal-edit" aria-expanded="${isOpen}">${isOpen ? 'Done' : 'Edit'}</button></div>
+      ${cd}
+      ${isOpen ? goalDetail(g) : g.trackers.length ? g.trackers.map(t => trackerHTML(g, t)).join('') : `<p class="muted-p">No trackers yet. Tap Edit to add one.</p>`}
+    </section>`;
+  }
+  h += `<button class="add-slot" data-act="goal-new">+ New goal</button>`;
+  $('#goals').innerHTML = h;
+}
+function trackerEdit(t) {
+  const logged = ['hours', 'count', 'score'].includes(t.kind);
+  const log = logged ? [...t.log].sort((a, b) => b.date.localeCompare(a.date) || b.created - a.created).slice(0, 30) : [];
+  let h = `<div class="trk-edit" data-trk="${t.id}">
+    <div class="trk-top"><span class="trk-kind">${TRACK_KINDS[t.kind].label}</span><button class="x" data-act="trk-del" aria-label="Remove ${esc(t.name)}">×</button></div>
+    <div class="form-grid">
+      <label class="lbl full">Name<input class="field" data-tedit="name" value="${esc(t.name)}"></label>
+      ${t.kind !== 'checklist' ? `<label class="lbl">${TARGET_LABEL[t.kind]}<input class="field" type="number" inputmode="decimal" min="0" data-tedit="target" value="${t.target || ''}"></label>` : ''}
+      ${t.kind === 'count' || t.kind === 'score' ? `<label class="lbl">Unit<input class="field" data-tedit="unit" value="${esc(t.unit)}"></label>` : ''}
+    </div>`;
+  if (t.kind === 'checklist') {
+    h += `<ul class="subs">${t.items.map(i => `
+      <li class="sub${i.done ? ' done' : ''}" data-item="${i.id}">
+        <button class="check sm" data-act="trk-item" aria-label="${i.done ? 'Mark not done' : 'Mark done'}"></button>
+        <input class="sub-in" data-iedit value="${esc(i.text)}" aria-label="Item">
+        <button class="x" data-act="trk-item-del" aria-label="Delete item">×</button>
+      </li>`).join('')}</ul>
+      <form class="sub-add" data-form="trk-item" autocomplete="off"><input placeholder="Add item" aria-label="Add item" enterkeyhint="done"><button type="submit">Add</button></form>
+      ${t.items.length ? '' : `<button class="soft-btn trk-preset" data-act="trk-fe">Fill with FE Electrical and Computer topics</button>`}`;
+  }
+  if (log.length) h += `<h3 class="mini-h">History</h3><ul class="log-list">${log.map(l => `<li data-log="${l.id}"><input type="date" data-ledit value="${l.date}" aria-label="Date"><span class="log-h">${esc(fmtV(t, l.v))}</span><button class="x" data-act="trk-log-del" aria-label="Delete entry">×</button></li>`).join('')}</ul>`;
+  return h + `</div>`;
+}
+function goalDetail(g) {
+  return `<div class="goal-detail">
+    <div class="form-grid">
+      <label class="lbl">Name<input class="field" data-gedit="name" value="${esc(g.name)}"></label>
+      <label class="lbl">Date<input class="field" type="date" data-gedit="date" value="${g.date || ''}"></label>
+    </div>
+    ${g.trackers.map(trackerEdit).join('')}
+    <div class="actions"><button class="soft-btn" data-act="trk-new">+ Add a tracker</button><button class="danger-btn" data-act="goal-del">Delete goal</button></div>
+  </div>`;
+}
+function logTracker(t, v) {
+  if (!(v > 0 || (t.kind === 'score' && v === 0))) return toast('That isn’t a number');
+  t.log.push({ id: uid(), date: todayKey(), v, created: Date.now() });
+  save(); renderGoals(); toast(`Logged ${fmtV(t, v)}`);
+}
+
+/* ---------- render: standards ---------- */
+const DOC_CATS = ['Workouts', 'Recipes', 'Grocery lists', 'Other'];
+function docMeta(d) {
+  if (d.kind === 'list') { const n = d.items.length; return n ? `${d.items.filter(i => i.done).length}/${n} checked` : 'Empty list'; }
+  const first = d.body.split('\n').find(l => l.trim());
+  return first ? first.trim() : 'Empty';
+}
+function docHTML(d) {
+  const isOpen = openDoc === d.id;
+  return `<li class="item${isOpen ? ' open' : ''}" data-doc="${d.id}">
+    <div class="row"><button class="open-btn doc-open" data-act="doc-expand" aria-expanded="${isOpen}"><span class="t">${esc(d.title)}</span><span class="meta">${esc(docMeta(d))}</span></button></div>
+    ${isOpen ? docDetail(d) : ''}</li>`;
+}
+function docDetail(d) {
+  const list = d.kind === 'list';
+  return `<div class="detail doc-detail">
+    <input class="field title-in" data-dedit="title" value="${esc(d.title)}" aria-label="Title">
+    <div class="doc-opts">
+      <select class="field" data-dedit="cat" aria-label="Category">${DOC_CATS.map(c => `<option${c === d.cat ? ' selected' : ''}>${c}</option>`).join('')}</select>
+      <div class="seg">${[['text', 'Text'], ['list', 'Checklist']].map(([k, n]) => `<button data-act="doc-kind" data-kind="${k}" aria-pressed="${d.kind === k}">${n}</button>`).join('')}</div>
+    </div>
+    ${list ? `<ul class="subs">${d.items.map(i => `
+      <li class="sub${i.done ? ' done' : ''}" data-item="${i.id}">
+        <button class="check sm" data-act="doc-check" aria-label="${i.done ? 'Uncheck' : 'Check'}"></button>
+        <input class="sub-in" data-dedit="item" value="${esc(i.text)}" aria-label="List item">
+        <button class="x" data-act="doc-item-del" aria-label="Delete item">×</button>
+      </li>`).join('')}</ul>
+      <form class="sub-add" data-form="doc-item" autocomplete="off">
+        <input placeholder="Add item" aria-label="Add item" enterkeyhint="done">
+        <button type="submit">Add</button>
+      </form>`
+    : `<textarea class="field doc-body" data-dedit="body" placeholder="Sets and reps, ingredients and steps, whatever the standard is" aria-label="Document text">${esc(d.body)}</textarea>`}
+    <div class="actions">
+      ${list && d.items.some(i => i.done) ? `<button class="soft-btn" data-act="doc-uncheck">Uncheck all</button>` : '<span></span>'}
+      <button class="danger-btn" data-act="doc-del">Delete</button>
+    </div>
+  </div>`;
+}
+function renderDocs() {
+  const f = DOC_CATS.includes(S.docCat) ? S.docCat : 'all';
+  $('#doc-chips').innerHTML = [['all', 'All', 0], ...DOC_CATS.map(c => [c, c, S.docs.filter(d => d.cat === c).length])].map(([v, n, c]) =>
+    `<button class="chip" data-act="doc-filter" data-cat="${esc(v)}" aria-pressed="${v === f}">${esc(n)}${c ? `<span class="n">${c}</span>` : ''}</button>`).join('')
+    + `<button class="chip add" data-act="doc-new">+ New</button>`;
+  let h = '';
+  for (const c of f === 'all' ? DOC_CATS : [f]) {
+    const ds = S.docs.filter(d => d.cat === c);
+    if (!ds.length) continue;
+    if (f === 'all') h += `<h3 class="day-h">${c}</h3>`;
+    h += `<ul class="list">${ds.map(docHTML).join('')}</ul>`;
+  }
+  $('#docs').innerHTML = h || `<p class="empty">No ${f === 'all' ? 'standards' : f.toLowerCase()} yet.<br>Tap + New to write down your go-to workouts, recipes and grocery lists.</p>`;
+}
+
+const VIEWS = {
+  today: { el: '#v-today', render: () => renderToday(), title: () => 'Daily three' },
+  notes: { el: '#v-notes', render: () => renderNotes(), title: () => proj().name },
+  work: { el: '#v-work', render: () => renderWork(), title: () => 'Workouts' },
+  goals: { el: '#v-goals', render: () => renderGoals(), title: () => 'Goals' },
+  docs: { el: '#v-docs', render: () => renderDocs(), title: () => 'Standards' }
+};
 function renderAll() {
-  const notes = S.tab === 'notes';
-  $('#v-today').hidden = notes; $('#v-notes').hidden = !notes; $('#quick-wrap').hidden = !notes;
+  if (!VIEWS[S.tab]) S.tab = 'today';
+  for (const [k, v] of Object.entries(VIEWS)) $(v.el).hidden = k !== S.tab;
+  $('#quick-wrap').hidden = S.tab !== 'notes';
   document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', t.dataset.tab === S.tab));
-  document.title = notes ? `${proj().name} · Jot` : 'Daily three · Jot';
-  notes ? renderNotes() : renderToday();
+  document.title = `${VIEWS[S.tab].title()} · Jot`;
+  VIEWS[S.tab].render();
 }
 
 /* ---------- quick add ---------- */
@@ -628,8 +1059,10 @@ async function planIntoDay(it, sb) {
   const k = await menu(`Plan “${sb ? sb.text : it.text}”`, days);
   if (!k) return;
   const opts = slotsFor(k).map(s => { const cur = getSlot(k, s.key); return { value: s.key, label: s.when, sub: cur.task ? `Replaces “${cur.task}”` : 'Empty' }; });
-  const key = await menu(dayLabel(k) === 'Today' ? 'Which slot today?' : `Which slot, ${dayLabel(k)}?`, opts);
+  opts.push({ value: '_new', label: '+ Add as an extra task' });
+  let key = await menu(dayLabel(k) === 'Today' ? 'Which slot today?' : `Which slot, ${dayLabel(k)}?`, opts);
   if (!key) return;
+  if (key === '_new') key = addExtra(k);
   assign(k, key, sb ? sb.text : it.text, it.id, 0, sb?.id);
   save(); renderNotes(); toast(`Planned for ${dayLabel(k) === 'Today' || dayLabel(k) === 'Tomorrow' ? dayLabel(k).toLowerCase() : dayLabel(k)}`);
 }
@@ -687,10 +1120,12 @@ document.addEventListener('click', async e => {
       if (sb) applyPick(sb.text, f.it.id, sb.id);
       break;
     }
-    case 'pick-task': applyPick(b.dataset.task); break;
-    case 'pick-custom': applyPick($('#pick-custom').value.trim()); break;
+    case 'pick-task': S.custom.includes(b.dataset.task) ? pickCustom(b.dataset.task) : applyPick(b.dataset.task); break;
+    case 'pick-custom': pickCustom($('#pick-custom').value.trim()); break;
+    case 'slot-add': { const key = addExtra(viewDay); save(); renderToday(); openPicker(viewDay, key); break; }
+    case 'slot-remove': removeSlot(pickCtx.k, pickCtx.slotKey); $('#pick').close(); save(); renderAll(); break;
     case 'pick-surprise': {
-      const all = (S.menus[pickCtx.menu] || []).flatMap(c => c.tasks);
+      const all = menuCats(pickCtx.menu).flatMap(c => c.tasks);
       const used = slotsFor(pickCtx.k).map(s => getSlot(pickCtx.k, s.key).task);
       const pool = all.filter(t => !used.includes(t));
       const pickFrom = pool.length ? pool : all;
@@ -707,12 +1142,15 @@ document.addEventListener('click', async e => {
     }
     case 'pick-close': $('#pick').close(); break;
     case 'today-menu': {
+      const d = S.days[viewDay], changed = d?._extra?.length || d?._hide?.length;
       const v = await menu('Daily three', [
         { value: 'lists', label: 'Edit task lists' },
-        { value: 'export', label: 'Export backup', sub: 'Notes and daily history together' },
+        ...(changed ? [{ value: 'reset-slots', label: 'Reset slots for this day', sub: 'Back to the default slots' }] : []),
+        { value: 'export', label: 'Export backup', sub: 'Everything in Jot' },
         { value: 'import', label: 'Import backup' }
       ]);
       if (v === 'lists') openLists();
+      else if (v === 'reset-slots') { (d._extra || []).forEach(x => delete d[x]); delete d._extra; delete d._hide; save(); renderToday(); }
       else if (v === 'export') exportBackup();
       else if (v === 'import') $('#file').click();
       break;
@@ -720,11 +1158,14 @@ document.addEventListener('click', async e => {
     case 'lists-seg': stashList(); listsMenu = b.dataset.menu; fillLists(); break;
     case 'lists-save': {
       stashList();
-      for (const [m, txt] of Object.entries(listsDraft)) S.menus[m] = parseList(txt);
+      for (const [m, txt] of Object.entries(listsDraft)) {
+        if (m === 'custom') S.custom = txt.split('\n').map(s => s.trim()).filter(Boolean);
+        else S.menus[m] = parseList(txt);
+      }
       $('#lists').close(); save(); renderAll(); toast('Task lists saved');
       break;
     }
-    case 'lists-reset': $('#lists-text').value = toText(DEFAULT_MENUS[listsMenu]); break;
+    case 'lists-reset': $('#lists-text').value = listsMenu === 'custom' ? '' : toText(DEFAULT_MENUS[listsMenu]); break;
     case 'lists-close': $('#lists').close(); break;
 
     /* notes */
@@ -760,9 +1201,11 @@ document.addEventListener('click', async e => {
     case 'menu': {
       const cp = proj(), inbox = cp.id === 'inbox';
       const opts = inbox ? [] : [{ value: 'rename', label: 'Rename project' }, { value: 'delete', label: 'Delete project', danger: true }];
+      if (S.projects.length > 1) opts.unshift({ value: 'reorder', label: 'Reorder projects' });
       opts.push({ value: 'export', label: 'Export backup' }, { value: 'import', label: 'Import backup' });
       const v = await menu(cp.name, opts);
-      if (v === 'rename') {
+      if (v === 'reorder') { renderOrder(); $('#order').showModal(); }
+      else if (v === 'rename') {
         const name = await ask({ title: 'Rename project', input: cp.name, ok: 'Rename' });
         if (name) { cp.name = name; save(); renderNotes(); }
       } else if (v === 'delete') {
@@ -774,7 +1217,184 @@ document.addEventListener('click', async e => {
       else if (v === 'import') $('#file').click();
       break;
     }
+    case 'order-move': {
+      const a = S.projects, i = +b.dataset.i, j = i + +b.dataset.d;
+      if (!a[j]) break;
+      [a[i], a[j]] = [a[j], a[i]];
+      save(); renderOrder(); renderNotes();
+      $(`#order-list [data-i="${j}"][data-d="${b.dataset.d}"]`)?.focus();
+      break;
+    }
+    case 'order-done': $('#order').close(); break;
+
+    /* workouts */
+    case 'wk-type': $('#wk-type').value = b.dataset.type; break;
+    case 'wk-mins': $('#wk-mins').value = b.dataset.mins; break;
+    case 'wk-del': {
+      const w = S.workouts.find(x => x.id === b.closest('[data-wk]').dataset.wk);
+      if (w && await ask({ title: 'Delete this workout?', body: `${w.type}, ${fmtMins(w.mins)} on ${dateShort(w.date)}`, ok: 'Delete', danger: true })) {
+        S.workouts = S.workouts.filter(x => x !== w); save(); renderWork();
+      }
+      break;
+    }
+
+    /* goals */
+    case 'goal-edit': case 'goal-del': case 'trk-new': case 'trk-add': case 'trk-other': case 'trk-day': case 'trk-item':
+    case 'trk-del': case 'trk-log-del': case 'trk-item-del': case 'trk-fe': {
+      const g = S.goals.find(x => x.id === b.closest('[data-goal]').dataset.goal);
+      if (!g) break;
+      const t = g.trackers.find(x => x.id === b.closest('[data-trk]')?.dataset.trk);
+      const item = t && b.closest('[data-item]') && t.items.find(x => x.id === b.closest('[data-item]').dataset.item);
+      const act = b.dataset.act;
+      if (act === 'goal-edit') openGoal = openGoal === g.id ? null : g.id;
+      else if (act === 'goal-del') {
+        if (!await ask({ title: `Delete ${g.name}?`, body: 'Its trackers and history go with it.', ok: 'Delete', danger: true })) break;
+        S.goals = S.goals.filter(x => x !== g); openGoal = null;
+      } else if (act === 'trk-new') {
+        const kind = await menu('Add a tracker', Object.entries(TRACK_KINDS).map(([value, k]) => ({ value, label: k.label, sub: k.sub })));
+        if (!kind) break;
+        g.trackers.push(newTracker(kind));
+      } else if (!t) break;
+      else if (act === 'trk-add') return logTracker(t, +b.dataset.v);
+      else if (act === 'trk-other') {
+        const v = await ask({
+          title: t.kind === 'score' ? `Add a ${t.name.toLowerCase()}` : `Log ${t.name.toLowerCase()}`,
+          body: (t.kind === 'hours' ? 'Hours' : t.kind === 'score' ? `Your result${t.unit === '%' ? ' in percent' : ''}` : `How many ${t.unit}`.trim()) + ', for today. You can change the date under Edit.',
+          input: '', placeholder: t.kind === 'hours' ? 'e.g. 1.5' : t.kind === 'score' ? 'e.g. 68' : 'e.g. 12', ok: 'Log' });
+        if (v) logTracker(t, parseFloat(v.replace(',', '.')));
+        break;
+      }
+      else if (act === 'trk-day') {
+        const i = t.log.findIndex(l => l.date === b.dataset.day);
+        if (i >= 0) t.log.splice(i, 1); else t.log.push({ id: uid(), date: b.dataset.day, v: 1, created: Date.now() });
+      }
+      else if (act === 'trk-item' && item) item.done = !item.done;
+      else if (act === 'trk-item-del') t.items = t.items.filter(x => x !== item);
+      else if (act === 'trk-log-del') t.log = t.log.filter(l => l.id !== b.closest('[data-log]').dataset.log);
+      else if (act === 'trk-fe') t.items.push(...feItems());
+      else if (act === 'trk-del') {
+        if (!await ask({ title: `Remove ${t.name}?`, body: 'Its history goes with it.', ok: 'Remove', danger: true })) break;
+        g.trackers = g.trackers.filter(x => x !== t);
+      }
+      save(); renderGoals();
+      break;
+    }
+    case 'goal-new': {
+      const name = await ask({ title: 'New goal', input: '', placeholder: 'e.g. PE exam, Half marathon', ok: 'Create' });
+      if (name) { const g = { id: uid(), name, date: '', trackers: [] }; S.goals.push(g); openGoal = g.id; save(); renderGoals(); }
+      break;
+    }
+
+    /* standards */
+    case 'doc-filter': S.docCat = b.dataset.cat; openDoc = null; save(); renderDocs(); break;
+    case 'doc-new': {
+      const title = await ask({ title: 'New standard', input: '', placeholder: 'e.g. Leg day, Chili, Weekly groceries', ok: 'Create' });
+      if (!title) break;
+      const cat = DOC_CATS.includes(S.docCat) ? S.docCat : (await menu('Which category?', DOC_CATS.map(c => ({ value: c, label: c })))) || 'Other';
+      const d = { id: uid(), title, cat, kind: cat === 'Grocery lists' ? 'list' : 'text', body: '', items: [], updated: Date.now() };
+      S.docs.push(d); openDoc = d.id; save(); renderDocs();
+      document.querySelector(`[data-doc="${d.id}"] ${d.kind === 'list' ? '.sub-add input' : 'textarea'}`)?.focus();
+      break;
+    }
+    case 'doc-expand': case 'doc-kind': case 'doc-check': case 'doc-item-del': case 'doc-uncheck': case 'doc-del': {
+      const d = S.docs.find(x => x.id === b.closest('[data-doc]').dataset.doc);
+      if (!d) break;
+      const item = b.closest('[data-item]') && d.items.find(x => x.id === b.closest('[data-item]').dataset.item);
+      const act = b.dataset.act;
+      if (act === 'doc-expand') openDoc = openDoc === d.id ? null : d.id;
+      else if (act === 'doc-kind') {
+        d.kind = b.dataset.kind;
+        // carry the content across when the other side is empty
+        if (d.kind === 'list' && !d.items.length && d.body.trim())
+          d.items = d.body.split('\n').map(l => l.replace(/^\s*([-*•]|\[[ x]?\])\s*/i, '').trim()).filter(Boolean).map(text => ({ id: uid(), text, done: false }));
+        if (d.kind === 'text' && !d.body.trim() && d.items.length) d.body = d.items.map(i => i.text).join('\n');
+      }
+      else if (act === 'doc-check' && item) item.done = !item.done;
+      else if (act === 'doc-item-del') d.items = d.items.filter(x => x !== item);
+      else if (act === 'doc-uncheck') d.items.forEach(i => i.done = false);
+      else if (act === 'doc-del') {
+        if (!await ask({ title: `Delete ${d.title}?`, ok: 'Delete', danger: true })) break;
+        S.docs = S.docs.filter(x => x !== d); openDoc = null;
+      }
+      d.updated = Date.now(); save(); renderDocs();
+      break;
+    }
   }
+});
+
+/* ---------- workout, goal and standards inputs ---------- */
+$('#work').addEventListener('submit', e => {
+  e.preventDefault();
+  const type = $('#wk-type').value.trim(), mins = Math.round(+$('#wk-mins').value);
+  if (!type || !(mins > 0)) return toast('Add a type and the minutes');
+  S.workouts.push({ id: uid(), date: $('#wk-date').value || todayKey(), type, mins, note: $('#wk-note').value.trim(), created: Date.now() });
+  save(); renderWork(); toast(`Logged ${type}, ${fmtMins(mins)}`);
+});
+// text and number fields save as you type (no re-render, so focus stays put); dates re-render
+$('#goals').addEventListener('input', e => {
+  const el = e.target, g = S.goals.find(x => x.id === el.closest('[data-goal]')?.dataset.goal);
+  if (!g || el.type === 'date') return;
+  const t = g.trackers.find(x => x.id === el.closest('[data-trk]')?.dataset.trk);
+  const v = el.value.trim();
+  if (el.dataset.gedit === 'name') { if (v) { g.name = v; el.closest('[data-goal]').querySelector('h2').textContent = v; } }
+  else if (t && el.dataset.tedit === 'name') { if (v) t.name = v; }
+  else if (t && el.dataset.tedit === 'target') t.target = Math.max(0, +v || 0);
+  else if (t && el.dataset.tedit === 'unit') t.unit = v;
+  else if (t && el.hasAttribute('data-iedit')) { const i = t.items.find(x => x.id === el.closest('[data-item]').dataset.item); if (i && v) i.text = v; }
+  else return;
+  saveSoon();
+});
+$('#goals').addEventListener('change', e => {
+  const el = e.target, g = S.goals.find(x => x.id === el.closest('[data-goal]')?.dataset.goal);
+  if (!g || el.type !== 'date') return;
+  const t = g.trackers.find(x => x.id === el.closest('[data-trk]')?.dataset.trk);
+  if (el.dataset.gedit === 'date') g.date = el.value;
+  else if (t && el.hasAttribute('data-ledit')) { const l = t.log.find(x => x.id === el.closest('[data-log]').dataset.log); if (l && el.value) l.date = el.value; }
+  else return;
+  save(); renderGoals();
+});
+$('#goals').addEventListener('submit', e => {
+  if (e.target.dataset.form !== 'trk-item') return;
+  e.preventDefault();
+  const g = S.goals.find(x => x.id === e.target.closest('[data-goal]').dataset.goal);
+  const t = g?.trackers.find(x => x.id === e.target.closest('[data-trk]').dataset.trk);
+  const text = e.target.querySelector('input').value.trim();
+  if (!t || !text) return;
+  t.items.push({ id: uid(), text, done: false });
+  save(); renderGoals();
+  document.querySelector(`[data-trk="${t.id}"] .sub-add input`)?.focus();
+});
+$('#goals').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && e.target.matches('.sub-in, [data-gedit], [data-tedit]')) { e.preventDefault(); e.target.blur(); }
+});
+$('#docs').addEventListener('input', e => {
+  const el = e.target, kind = el.dataset.dedit;
+  const d = kind && S.docs.find(x => x.id === el.closest('[data-doc]').dataset.doc);
+  if (!d || kind === 'cat') return;
+  if (kind === 'title') { if (el.value.trim()) { d.title = el.value.trim(); el.closest('.item').querySelector('.t').textContent = d.title; } }
+  else if (kind === 'body') d.body = el.value;
+  else if (kind === 'item') { const i = d.items.find(x => x.id === el.closest('[data-item]').dataset.item); if (i && el.value.trim()) i.text = el.value.trim(); }
+  d.updated = Date.now(); saveSoon();
+});
+$('#docs').addEventListener('change', e => {
+  if (e.target.dataset.dedit !== 'cat') return;
+  const d = S.docs.find(x => x.id === e.target.closest('[data-doc]').dataset.doc);
+  if (d) { d.cat = e.target.value; save(); renderDocs(); }
+});
+$('#docs').addEventListener('submit', e => {
+  if (e.target.dataset.form !== 'doc-item') return;
+  e.preventDefault();
+  const inp = e.target.querySelector('input');
+  const d = S.docs.find(x => x.id === e.target.closest('[data-doc]').dataset.doc);
+  // pasting several lines adds one item per line
+  const lines = inp.value.split('\n').map(s => s.trim()).filter(Boolean);
+  if (!d || !lines.length) return;
+  d.items.push(...lines.map(text => ({ id: uid(), text, done: false })));
+  d.updated = Date.now(); save(); renderDocs();
+  document.querySelector(`[data-doc="${d.id}"] .sub-add input`)?.focus();
+});
+$('#docs').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && e.target.matches('.title-in, .sub-in')) { e.preventDefault(); e.target.blur(); }
 });
 
 /* ---------- list editor ---------- */
@@ -789,12 +1409,12 @@ function parseList(txt) {
   return out;
 }
 function openLists() {
-  listsDraft = Object.fromEntries(Object.keys(MENU_NAMES).map(m => [m, toText(S.menus[m] || [])]));
+  listsDraft = Object.fromEntries(Object.keys(LIST_TABS).map(m => [m, m === 'custom' ? S.custom.join('\n') : toText(S.menus[m] || [])]));
   listsMenu = 'morning'; fillLists(); $('#lists').showModal();
 }
 function stashList() { if (listsDraft) listsDraft[listsMenu] = $('#lists-text').value; }
 function fillLists() {
-  $('#lists-seg').innerHTML = Object.entries(MENU_NAMES).map(([m, n]) =>
+  $('#lists-seg').innerHTML = Object.entries(LIST_TABS).map(([m, n]) =>
     `<button data-act="lists-seg" data-menu="${m}" aria-pressed="${m === listsMenu}">${n}</button>`).join('');
   $('#lists-text').value = listsDraft[listsMenu];
 }
@@ -820,6 +1440,7 @@ $('#file').addEventListener('change', async e => {
                     body: full ? 'All notes and daily history will be replaced by this backup.' : 'This is a notes-only backup. Your notes will be replaced; daily history stays.',
                     ok: 'Replace', danger: true })) {
       S = full ? Object.assign(fresh(), d) : Object.assign(S, { projects: d.projects, current: 'inbox' });
+      migrateGoals();
       open = null; save(); renderAll(); toast('Backup restored');
     }
   } catch (err) { toast('That file isn’t a Jot backup'); }
@@ -858,13 +1479,15 @@ $('#main').addEventListener('submit', e => {
 $('#main').addEventListener('keydown', e => {
   if (e.key === 'Enter' && e.target.matches('.title-in, .sub-in')) { e.preventDefault(); e.target.blur(); }
 });
-$('#pick-custom').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); applyPick(e.target.value.trim()); } });
+$('#pick-custom').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); pickCustom(e.target.value.trim()); } });
 $('#pick').addEventListener('click', e => { if (e.target === $('#pick')) $('#pick').close(); });
 
 /* ---------- start ---------- */
 const params = new URLSearchParams(location.search);
 if (params.has('add')) S.tab = 'notes';
 else if (params.has('today')) S.tab = 'today';
+else if (VIEWS[params.get('tab')]) S.tab = params.get('tab');
+migrateGoals();
 renderAll();
 if (params.has('add')) setTimeout(() => $('#q').focus(), 150);
 navigator.storage?.persist?.();

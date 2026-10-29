@@ -16,7 +16,12 @@ In the artifact: ⋯ → Export backup. In the installed app: ⋯ → Import bac
 ## Tips
 - `#projectname` in a quick note files it under that project (a prefix works: `#rap` → Raptor).
 - The calendar button on a note or subtask puts it into a daily three slot; flipping the breaker checks it off.
-- ⋯ → Edit task lists changes the morning, evening small and big-task menus.
+- ⋯ → Edit task lists changes the morning, evening small and big-task menus, plus "Your tasks" (the ones you've typed yourself, which show first in the picker).
+- **+ Add a task** adds an extra slot for that day; **Remove this slot** in the picker drops one. ⋯ → Reset slots puts the day back to the default.
+- **Goals**: each goal has a date countdown and any mix of trackers (Edit → + Add a tracker): Checklist (topics/milestones), Count (problems, chapters), Score (practice exams vs. a passing mark), Consistency (days a week, tap the day dots) and Time (hours). The first tracker with progress also shows on the Daily tab.
+- **Standards**: workouts, recipes, grocery lists. Switch a doc to Checklist for things like groceries, then "Uncheck all" to reuse it.
+- Notes → ⋯ → Reorder projects changes the order of the project chips.
+- `?tab=work`, `?tab=goals` or `?tab=docs` opens straight to that tab.
 - Export a backup now and then.
 
 ## Updating
